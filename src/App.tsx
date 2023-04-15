@@ -62,12 +62,13 @@ function App() {
       />
       <button
         type="button"
-        onClick={() =>
+        onClick={() => {
           addPreset({
             price: newPresetPrice,
             createdAt: new Date().getTime(),
-          })
-        }
+          });
+          setNewPresetPrice(0);
+        }}
       >
         追加
       </button>
@@ -99,9 +100,10 @@ function App() {
           />
           <button
             type="button"
-            onClick={() =>
-              addExpense({ price, label: "", createdAt: new Date().getTime() })
-            }
+            onClick={() => {
+              addExpense({ price, label: "", createdAt: new Date().getTime() });
+              setPrice(0);
+            }}
           >
             追加
           </button>
