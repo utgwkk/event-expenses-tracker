@@ -58,6 +58,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>イベント支出記録君</h1>
       <h2>プリセット</h2>
       <Row className="mb-2">
         <Col xs="auto">
