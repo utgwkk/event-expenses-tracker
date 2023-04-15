@@ -59,7 +59,7 @@ function App() {
   return (
     <div className="App">
       <h2>プリセット</h2>
-      <Row>
+      <Row className="mb-2">
         <Col xs="auto">
           <Form.Control
             type="text"
@@ -88,7 +88,7 @@ function App() {
         {presets.map((p, i) => (
           <Col key={i} xs="auto">
             <Button
-              className="me-1"
+              className="me-1 mb-2"
               size="lg"
               variant="secondary"
               type="button"
@@ -147,7 +147,13 @@ function App() {
                   variant="close"
                   type="button"
                   onClick={() => {
-                    if (window.confirm(`${exp.price} (${dayjs(exp.createdAt).format("M/D HH:mm")} を消しますか？)`)) {
+                    if (
+                      window.confirm(
+                        `${exp.price} (${dayjs(exp.createdAt).format(
+                          "M/D HH:mm"
+                        )} を消しますか？)`
+                      )
+                    ) {
                       deleteExpense(i);
                     }
                   }}
