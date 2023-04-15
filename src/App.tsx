@@ -3,19 +3,7 @@ import { useCallback } from "react";
 import { useStateWithLocalStorage } from "./hooks/useStateWithLocalStorage";
 import dayjs from "dayjs";
 import { Button, Col, Container, Form, ListGroup, Row } from "react-bootstrap";
-
-type Expense = {
-  price: number;
-  label: string;
-  // new Date().getTime()
-  createdAt: number;
-};
-
-type Preset = {
-  price: number;
-  // new Date().getTime()
-  createdAt: number;
-};
+import { Expense, Preset } from "./types";
 
 const exportAsCSV = (expenses: Expense[]) => {
   const rows = [["日時", "値段", "備考"]];
