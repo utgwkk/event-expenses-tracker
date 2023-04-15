@@ -22,39 +22,21 @@ export const Expenses: React.FC = () => {
     },
     [setExpenses]
   );
-  const [price, setPrice] = useState(0);
 
   return (
     <>
       <h2>支出記録</h2>
       <ListGroup className="mb-2">
         <ListGroup.Item>
-          <Row>
-            <Col xs="auto">
-              <Form.Control
-                type="text"
-                inputMode="numeric"
-                value={price}
-                onChange={(e) => setPrice(Number(e.target.value))}
-              />
-            </Col>
-            <Col xs="auto">
-              <Button
-                type="button"
-                disabled={price === 0}
-                onClick={() => {
-                  addExpense({
-                    price,
-                    label: "",
-                    createdAt: new Date().getTime(),
-                  });
-                  setPrice(0);
-                }}
-              >
-                追加
-              </Button>
-            </Col>
-          </Row>
+          <AddExpenseInput
+            onAddExpense={(price) =>
+              addExpense({
+                price,
+                label: "",
+                createdAt: new Date().getTime(),
+              })
+            }
+          />
         </ListGroup.Item>
         {expenses.map((exp, i) => (
           <ListGroup.Item key={i}>
@@ -85,5 +67,38 @@ export const Expenses: React.FC = () => {
         ))}
       </ListGroup>
     </>
+  );
+};
+
+type AddExpenseInputProps = {
+  onAddExpense: (price: number) => void;
+};
+
+const AddExpenseInput: React.FC<AddExpenseInputProps> = ({ onAddExpense }) => {
+  const [price, setPrice] = useState(0);
+
+  return (
+    <Row>
+      <Col xs="auto">
+        <Form.Control
+          type="text"
+          inputMode="numeric"
+          value={price}
+          onChange={(e) => setPrice(Number(e.target.value))}
+        />
+      </Col>
+      <Col xs="auto">
+        <Button
+          type="button"
+          disabled={price === 0}
+          onClick={() => {
+            onAddExpense(price);
+            setPrice(0);
+          }}
+        >
+          追加
+        </Button>
+      </Col>
+    </Row>
   );
 };
