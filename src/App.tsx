@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useCallback } from "react";
 import { useStateWithLocalStorage } from "./hooks/useStateWithLocalStorage";
 import dayjs from "dayjs";
+import { Button, Col, Form, ListGroup, Row } from "react-bootstrap";
 
 type Expense = {
   price: number;
@@ -54,70 +55,97 @@ function App() {
   return (
     <div className="App">
       <h2>プリセット</h2>
-      <input
-        type="text"
-        inputMode="numeric"
-        value={newPresetPrice}
-        onChange={(e) => setNewPresetPrice(Number(e.target.value))}
-      />
-      <button
-        type="button"
-        onClick={() => {
-          addPreset({
-            price: newPresetPrice,
-            createdAt: new Date().getTime(),
-          });
-          setNewPresetPrice(0);
-        }}
-      >
-        追加
-      </button>
-      <div>
-        {presets.map((p, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() =>
-              addExpense({
-                price: p.price,
-                label: "",
-                createdAt: new Date().getTime(),
-              })
-            }
-          >
-            {p.price}
-          </button>
-        ))}
-      </div>
-      <h2>支出記録</h2>
-      <ul>
-        <li>
-          <input
+      <Row>
+        <Col xs="auto">
+          <Form.Control
             type="text"
             inputMode="numeric"
-            value={price}
-            onChange={(e) => setPrice(Number(e.target.value))}
+            value={newPresetPrice}
+            onChange={(e) => setNewPresetPrice(Number(e.target.value))}
           />
-          <button
+        </Col>
+        <Col xs="auto">
+          <Button
             type="button"
             onClick={() => {
-              addExpense({ price, label: "", createdAt: new Date().getTime() });
-              setPrice(0);
+              addPreset({
+                price: newPresetPrice,
+                createdAt: new Date().getTime(),
+              });
+              setNewPresetPrice(0);
             }}
           >
             追加
-          </button>
-        </li>
-        {expenses.map((exp, i) => (
-          <li key={i}>
-            <button type="button" onClick={() => deleteExpense(i)}>
-              x
-            </button>
-            {exp.price} {exp.label !== "" && <>({exp.label})</>}(
-            {dayjs(exp.createdAt).format("M/D HH:mm")})
-          </li>
+          </Button>
+        </Col>
+      </Row>
+      <Row>
+        {presets.map((p, i) => (
+          <Col key={i} xs="auto">
+            <Button
+              className="me-1"
+              variant="secondary"
+              type="button"
+              onClick={() =>
+                addExpense({
+                  price: p.price,
+                  label: "",
+                  createdAt: new Date().getTime(),
+                })
+              }
+            >
+              {p.price}
+            </Button>
+          </Col>
         ))}
-      </ul>
+      </Row>
+      <h2>支出記録</h2>
+      <ListGroup>
+        <ListGroup.Item>
+          <Row>
+            <Col xs="auto">
+              <Form.Control
+                type="text"
+                inputMode="numeric"
+                value={price}
+                onChange={(e) => setPrice(Number(e.target.value))}
+              />
+            </Col>
+            <Col xs="auto">
+              <Button
+                type="button"
+                onClick={() => {
+                  addExpense({
+                    price,
+                    label: "",
+                    createdAt: new Date().getTime(),
+                  });
+                  setPrice(0);
+                }}
+              >
+                追加
+              </Button>
+            </Col>
+          </Row>
+        </ListGroup.Item>
+        {expenses.map((exp, i) => (
+          <ListGroup.Item key={i}>
+            <Row>
+              <Col xs="10">
+                {exp.price} {exp.label !== "" && <>({exp.label})</>}(
+                {dayjs(exp.createdAt).format("M/D HH:mm")})
+              </Col>
+              <Col xs="1">
+                <Button
+                  variant="close"
+                  type="button"
+                  onClick={() => deleteExpense(i)}
+                ></Button>
+              </Col>
+            </Row>
+          </ListGroup.Item>
+        ))}
+      </ListGroup>
     </div>
   );
 }
