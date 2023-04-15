@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useCallback } from "react";
 import { useStateWithLocalStorage } from "./hooks/useStateWithLocalStorage";
 import dayjs from "dayjs";
-import { Button, Col, Form, ListGroup, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, ListGroup, Row } from "react-bootstrap";
 
 type Expense = {
   price: number;
@@ -78,7 +78,7 @@ function App() {
   const [price, setPrice] = useState(0);
 
   return (
-    <div className="App">
+    <Container className="p-3">
       <h1>イベント支出記録君</h1>
       <h2>プリセット</h2>
       <Row className="mb-2">
@@ -110,7 +110,7 @@ function App() {
         {presets.map((p, i) => (
           <Col key={i} xs="auto">
             <Button
-              className="me-1 mb-2"
+              className="mb-2"
               size="lg"
               variant="secondary"
               type="button"
@@ -215,7 +215,7 @@ function App() {
       >
         プリセットを全部消す
       </Button>
-    </div>
+    </Container>
   );
 }
 
