@@ -42,7 +42,8 @@ export const Expenses: React.FC = () => {
           <ListGroup.Item key={i}>
             <Row>
               <Col xs="10">
-                {exp.price} {exp.label !== "" && <>({exp.label})</>}(
+                {exp.price.toLocaleString()}{" "}
+                {exp.label !== "" && <>({exp.label})</>}(
                 {dayjs(exp.createdAt).format("M/D HH:mm")})
               </Col>
               <Col xs="1">

@@ -52,7 +52,7 @@ export const Presets: React.FC = () => {
                 })
               }
             >
-              {p.price}
+              {p.price.toLocaleString()}
             </Button>
           </Col>
         ))}
