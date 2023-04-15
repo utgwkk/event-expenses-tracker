@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { useCallback } from "react";
-import { useStateWithLocalStorage } from "./hooks/useStateWithLocalStorage";
 import dayjs from "dayjs";
 import { Button, Col, Container, Form, ListGroup, Row } from "react-bootstrap";
 import { Expense, Preset } from "./types";
 import { exportAsCSV } from "./csvExport";
+import { useRecoilState } from "recoil";
+import { expensesAtom } from "./recoil/expenses";
+import { presetsAtom } from "./recoil/presets";
 
 function App() {
-  const [expenses, setExpenses] = useStateWithLocalStorage<Expense[]>(
-    [],
-    "expenses"
-  );
+  const [expenses, setExpenses] = useRecoilState(expensesAtom);
   const addExpense = useCallback(
     (exp: Expense) => {
       setExpenses((curr) => [exp, ...curr]);
@@ -27,10 +26,7 @@ function App() {
     [setExpenses]
   );
 
-  const [presets, setPresets] = useStateWithLocalStorage<Preset[]>(
-    [],
-    "presets"
-  );
+  const [presets, setPresets] = useRecoilState(presetsAtom);
   const addPreset = useCallback(
     (p: Preset) => {
       setPresets((curr) => {
