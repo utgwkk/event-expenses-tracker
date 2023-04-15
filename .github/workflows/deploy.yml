@@ -34,5 +34,5 @@ jobs:
 
       - name: Sync to S3
         run: |
-          aws s3 sync ./dist s3://${{ secrets.AWS_S3_BUCKET }}/event-expenses-tracker --no-progress \
+          aws s3 sync ./dist s3://sugarheart.utgw.net/event-expenses-tracker --no-progress \
             --acl public-read --follow-symlinks --delete
