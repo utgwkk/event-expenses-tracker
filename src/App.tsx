@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCallback } from "react";
 import { useStateWithLocalStorage } from "./hooks/useStateWithLocalStorage";
+import dayjs from "dayjs";
 
 type Expense = {
   price: number;
@@ -110,7 +111,8 @@ function App() {
             <button type="button" onClick={() => deleteExpense(i)}>
               x
             </button>
-            {exp.price} {exp.label !== "" && <>({exp.label})</>}
+            {exp.price} {exp.label !== "" && <>({exp.label})</>}(
+            {dayjs(exp.createdAt).format("M/D HH:mm")})
           </li>
         ))}
       </ul>
