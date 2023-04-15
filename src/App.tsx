@@ -55,8 +55,8 @@ function App() {
     <div className="App">
       <h2>プリセット</h2>
       <input
-        type="number"
-        min={0}
+        type="text"
+        inputMode="numeric"
         value={newPresetPrice}
         onChange={(e) => setNewPresetPrice(Number(e.target.value))}
       />
@@ -92,8 +92,8 @@ function App() {
       <ul>
         <li>
           <input
-            type="number"
-            min={0}
+            type="text"
+            inputMode="numeric"
             value={price}
             onChange={(e) => setPrice(Number(e.target.value))}
           />
