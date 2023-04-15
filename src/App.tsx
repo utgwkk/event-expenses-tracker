@@ -146,7 +146,11 @@ function App() {
                 <Button
                   variant="close"
                   type="button"
-                  onClick={() => deleteExpense(i)}
+                  onClick={() => {
+                    if (window.confirm(`${exp.price} (${dayjs(exp.createdAt).format("M/D HH:mm")} を消しますか？)`)) {
+                      deleteExpense(i);
+                    }
+                  }}
                 ></Button>
               </Col>
             </Row>
