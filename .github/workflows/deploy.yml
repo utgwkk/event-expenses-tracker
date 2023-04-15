@@ -1,0 +1,38 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_ROLE_ARN: arn:aws:iam::747582436141:role/event-expenses-tracker-deploy
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: yarn
+
+      - run: yarn install --frozen-lockfile
+
+      - run: yarn build
+
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          role-session-name: event-expenses-tracker-role-session
+          aws-region: ap-northeast-1
+
+      - name: Sync to S3
+        run: |
+          aws s3 sync ./dist s3://${{ secrets.AWS_S3_BUCKET }}/event-expenses-tracker --no-progress \
+            --acl public-read --follow-symlinks --delete
