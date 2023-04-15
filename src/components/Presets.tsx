@@ -18,7 +18,6 @@ export const Presets: React.FC = () => {
     },
     [setPresets]
   );
-  const [newPresetPrice, setNewPresetPrice] = useState(0);
   const addExpense = useCallback(
     (exp: Expense) => {
       setExpenses((curr) => [exp, ...curr]);
@@ -29,31 +28,14 @@ export const Presets: React.FC = () => {
   return (
     <>
       <h2>プリセット</h2>
-      <Row className="mb-2">
-        <Col xs="auto">
-          <Form.Control
-            type="text"
-            inputMode="numeric"
-            value={newPresetPrice}
-            onChange={(e) => setNewPresetPrice(Number(e.target.value))}
-          />
-        </Col>
-        <Col xs="auto">
-          <Button
-            type="button"
-            disabled={newPresetPrice === 0}
-            onClick={() => {
-              addPreset({
-                price: newPresetPrice,
-                createdAt: new Date().getTime(),
-              });
-              setNewPresetPrice(0);
-            }}
-          >
-            追加
-          </Button>
-        </Col>
-      </Row>
+      <AddPresetInput
+        onAddPreset={(newPresetPrice) =>
+          addPreset({
+            price: newPresetPrice,
+            createdAt: new Date().getTime(),
+          })
+        }
+      />
       <Row>
         {presets.map((p, i) => (
           <Col key={i} xs="auto">
@@ -76,5 +58,38 @@ export const Presets: React.FC = () => {
         ))}
       </Row>
     </>
+  );
+};
+
+type AddPresetInputProps = {
+  onAddPreset: (price: number) => void;
+};
+
+const AddPresetInput: React.FC<AddPresetInputProps> = ({ onAddPreset }) => {
+  const [newPresetPrice, setNewPresetPrice] = useState(0);
+
+  return (
+    <Row className="mb-2">
+      <Col xs="auto">
+        <Form.Control
+          type="text"
+          inputMode="numeric"
+          value={newPresetPrice}
+          onChange={(e) => setNewPresetPrice(Number(e.target.value))}
+        />
+      </Col>
+      <Col xs="auto">
+        <Button
+          type="button"
+          disabled={newPresetPrice === 0}
+          onClick={() => {
+            onAddPreset(newPresetPrice);
+            setNewPresetPrice(0);
+          }}
+        >
+          追加
+        </Button>
+      </Col>
+    </Row>
   );
 };
