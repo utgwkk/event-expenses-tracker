@@ -27,7 +27,7 @@ export const DangerZone: React.FC = () => {
       </Button>
       <Button
         type="button"
-        variant="danger"
+        variant="outline-danger"
         className="me-1"
         onClick={() => {
           if (window.confirm("全部のプリセットを消しますか？")) {
