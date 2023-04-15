@@ -5,6 +5,8 @@ import { useStateWithLocalStorage } from "./hooks/useStateWithLocalStorage";
 type Expense = {
   price: number;
   label: string;
+  // new Date().getTime()
+  createdAt: number;
 };
 
 function App() {
@@ -43,7 +45,9 @@ function App() {
           />
           <button
             type="button"
-            onClick={() => addExpense({ price, label: "" })}
+            onClick={() =>
+              addExpense({ price, label: "", createdAt: new Date().getTime() })
+            }
           >
             追加
           </button>
