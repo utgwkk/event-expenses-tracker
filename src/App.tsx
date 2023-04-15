@@ -71,6 +71,7 @@ function App() {
         <Col xs="auto">
           <Button
             type="button"
+            disabled={newPresetPrice === 0}
             onClick={() => {
               addPreset({
                 price: newPresetPrice,
@@ -118,6 +119,7 @@ function App() {
             <Col xs="auto">
               <Button
                 type="button"
+                disabled={price === 0}
                 onClick={() => {
                   addExpense({
                     price,
