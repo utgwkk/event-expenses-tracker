@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 
-const localStorageKey = (key: string) => `useStateWithLocalStorage:${key}`;
+const localStorageKey = (key: string) => `event-expenses-tracker:useStateWithLocalStorage:${key}`;
 
 export const useStateWithLocalStorage = <T>(
   defaultValue: T,
