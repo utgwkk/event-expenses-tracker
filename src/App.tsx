@@ -44,7 +44,11 @@ function App() {
   );
   const addPreset = useCallback(
     (p: Preset) => {
-      setPresets((curr) => [...curr, p]);
+      setPresets((curr) => {
+        const newPresets = [...curr, p];
+        newPresets.sort((a, b) => a.price - b.price);
+        return newPresets;
+      });
     },
     [setPresets]
   );
