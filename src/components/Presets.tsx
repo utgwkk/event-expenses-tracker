@@ -11,6 +11,10 @@ export const Presets: React.FC = () => {
   const addPreset = useCallback(
     (p: Preset) => {
       setPresets((curr) => {
+        if (curr.findIndex((x) => x.price === p.price) !== -1) {
+          return curr;
+        }
+
         const newPresets = [...curr, p];
         newPresets.sort((a, b) => a.price - b.price);
         return newPresets;
