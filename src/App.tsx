@@ -89,6 +89,7 @@ function App() {
           <Col key={i} xs="auto">
             <Button
               className="me-1"
+              size="lg"
               variant="secondary"
               type="button"
               onClick={() =>
