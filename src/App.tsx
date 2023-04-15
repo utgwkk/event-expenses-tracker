@@ -1,14 +1,14 @@
 import React from "react";
 import { Button, Container } from "react-bootstrap";
-import { exportAsCSV } from "./csvExport";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { expensesAtom } from "./recoil/expenses";
 import { Presets } from "./components/Presets";
 import { presetsAtom } from "./recoil/presets";
 import { Expenses } from "./components/Expenses";
+import { CSVExport } from "./components/CSVExport";
 
 function App() {
-  const [expenses, setExpenses] = useRecoilState(expensesAtom);
+  const setExpenses = useSetRecoilState(expensesAtom);
   const setPresets = useSetRecoilState(presetsAtom);
 
   return (
@@ -16,9 +16,7 @@ function App() {
       <h1>イベント支出記録君</h1>
       <Presets />
       <Expenses />
-      <Button type="button" onClick={() => exportAsCSV(expenses)}>
-        CSVとしてエクスポート
-      </Button>
+      <CSVExport />
       <h2>スーパー危険ゾーン</h2>
       <Button
         type="button"
