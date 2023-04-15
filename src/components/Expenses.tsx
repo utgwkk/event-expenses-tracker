@@ -44,7 +44,10 @@ export const Expenses: React.FC = () => {
               <Col xs="10">
                 {exp.price.toLocaleString()}{" "}
                 {exp.label !== "" && <>({exp.label})</>}(
-                {dayjs(exp.createdAt).format("M/D HH:mm")})
+                <time dateTime={dayjs(exp.createdAt).toISOString()}>
+                  {dayjs(exp.createdAt).format("M/D HH:mm:ss")}
+                </time>
+                )
               </Col>
               <Col xs="1">
                 <Button
