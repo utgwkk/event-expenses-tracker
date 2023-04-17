@@ -26,3 +26,12 @@ export const exportAsCSV = (expenses: Expense[]) => {
   anchor.remove();
   URL.revokeObjectURL(downloadUrl);
 };
+
+export const copyAsTSV = (expenses: Expense[]) => {
+  const rows = createRows(expenses);
+
+  const tsv = rows.map((r) => r.join("\t")).join(`\n`);
+  navigator.clipboard.writeText(tsv).catch((ex) => {
+    console.error(ex);
+  });
+};
