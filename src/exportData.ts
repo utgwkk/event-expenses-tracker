@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { Expense } from "./types";
 
-export const exportAsCSV = (expenses: Expense[]) => {
+const createRows = (expenses: Expense[]) => {
   const rows = [["日時", "値段", "備考"]];
   for (const expense of expenses) {
     const row = [
@@ -11,6 +11,11 @@ export const exportAsCSV = (expenses: Expense[]) => {
     ];
     rows.push(row);
   }
+  return rows;
+};
+
+export const exportAsCSV = (expenses: Expense[]) => {
+  const rows = createRows(expenses);
 
   const csv = rows.map((r) => r.join(",")).join(`\n`);
   const downloadUrl = URL.createObjectURL(new Blob([csv]));
