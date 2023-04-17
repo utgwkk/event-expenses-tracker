@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { exportAsCSV } from "../csvExport";
+import { exportAsCSV } from "../exportData";
 import { useRecoilValue } from "recoil";
 import { expensesAtom } from "../recoil/expenses";
 
