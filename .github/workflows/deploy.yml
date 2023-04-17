@@ -29,7 +29,7 @@ jobs:
       - uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: ${{ env.AWS_ROLE_ARN }}
-          role-session-name: event-expenses-tracker-role-session
+          role-session-name: event-expenses-tracker-role-session-${{ github.run_id }}
           aws-region: ap-northeast-1
 
       - name: Sync to S3
