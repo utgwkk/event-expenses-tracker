@@ -52,23 +52,25 @@ export const Expenses: React.FC = () => {
                 </time>
                 )
               </Col>
-              <Col xs="1">
-                <Button
-                  variant="close"
-                  type="button"
-                  onClick={() => {
-                    if (
-                      window.confirm(
-                        `${exp.price} (${dayjs(exp.createdAt).format(
-                          "M/D HH:mm"
-                        )} を消しますか？)`
-                      )
-                    ) {
-                      deleteExpense(i);
-                    }
-                  }}
-                ></Button>
-              </Col>
+              {!isReadonly() && (
+                <Col xs="1">
+                  <Button
+                    variant="close"
+                    type="button"
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          `${exp.price} (${dayjs(exp.createdAt).format(
+                            "M/D HH:mm"
+                          )} を消しますか？)`
+                        )
+                      ) {
+                        deleteExpense(i);
+                      }
+                    }}
+                  ></Button>
+                </Col>
+              )}
             </Row>
           </ListGroup.Item>
         ))}
