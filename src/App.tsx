@@ -6,6 +6,7 @@ import { CSVExport } from "./components/CSVExport";
 import { DangerZone } from "./components/DangerZone";
 import { CopyAsTSV } from "./components/CopyAsTSV";
 import { isReadonly } from "./readonly";
+import { ShareUrl } from "./components/ShareUrl";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Expenses />
       <CSVExport />
       <CopyAsTSV />
+      <ShareUrl />
       {!isReadonly() && <DangerZone />}
     </Container>
   );
