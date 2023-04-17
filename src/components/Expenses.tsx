@@ -4,6 +4,7 @@ import { ListGroup, Row, Col, Form, Button } from "react-bootstrap";
 import { useRecoilState } from "recoil";
 import { expensesAtom } from "../recoil/expenses";
 import { Expense } from "../types";
+import { isReadonly } from "../readonly";
 
 export const Expenses: React.FC = () => {
   const [expenses, setExpenses] = useRecoilState(expensesAtom);
@@ -27,17 +28,19 @@ export const Expenses: React.FC = () => {
     <>
       <h2>支出記録</h2>
       <ListGroup className="mb-2">
-        <ListGroup.Item>
-          <AddExpenseInput
-            onAddExpense={(price) =>
-              addExpense({
-                price,
-                label: "",
-                createdAt: new Date().getTime(),
-              })
-            }
-          />
-        </ListGroup.Item>
+        {!isReadonly() && (
+          <ListGroup.Item>
+            <AddExpenseInput
+              onAddExpense={(price) =>
+                addExpense({
+                  price,
+                  label: "",
+                  createdAt: new Date().getTime(),
+                })
+              }
+            />
+          </ListGroup.Item>
+        )}
         {expenses.map((exp, i) => (
           <ListGroup.Item key={i}>
             <Row>
