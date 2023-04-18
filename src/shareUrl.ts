@@ -17,6 +17,10 @@ const isExpense = (x: any): x is Expense => {
 };
 
 export const parseShareUrl = (hash: string): Expense[] => {
+  return parseJsonB64Url(hash);
+};
+
+const parseJsonB64Url = (hash: string): Expense[] => {
   try {
     const b64decoded = atob(hash);
     const parsed = JSON.parse(b64decoded);
