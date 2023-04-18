@@ -26,6 +26,8 @@ jobs:
 
       - run: yarn build --base=/event-expenses-tracker/
 
+      - run: yarn test
+
       - uses: actions/upload-artifact@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
