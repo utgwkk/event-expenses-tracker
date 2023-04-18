@@ -8,7 +8,7 @@ export const CopyAsTSV: React.FC = () => {
   const expenses = useRecoilValue(expensesAtom);
 
   return (
-    <Button type="button" onClick={() => copyAsTSV(expenses)}>
+    <Button type="button" className="me-1" onClick={() => copyAsTSV(expenses)}>
       TSVとしてコピー
     </Button>
   );
